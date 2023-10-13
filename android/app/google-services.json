@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "2857326961",
+    "project_id": "fir-auth-provider-c26e5",
+    "storage_bucket": "fir-auth-provider-c26e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2857326961:android:aa3bb08160c0b858f67ed0",
+        "android_client_info": {
+          "package_name": "com.example.fb_auth_provider"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXP-tlnhI1ofs8ydSNMgwG8vHRNL-y0BI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
