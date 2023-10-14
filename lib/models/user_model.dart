@@ -27,6 +27,10 @@ class User extends Equatable {
         point: userData['point'],
         rank: userData['rank']);
   }
+  factory User.initialUser() {
+    return User(
+        id: '', name: '', email: '', profileImage: '', point: -1, rank: '');
+  }
 
   @override
   List<Object> get props {
