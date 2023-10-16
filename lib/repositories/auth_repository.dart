@@ -9,4 +9,6 @@ class AuthRepository {
     required this.firebaseFirestore,
     required this.firebaseAuth,
   });
+
+  Stream<fbAuth.User?> get user => firebaseAuth.userChanges();
 }
