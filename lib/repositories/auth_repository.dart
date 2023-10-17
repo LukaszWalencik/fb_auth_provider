@@ -52,4 +52,8 @@ class AuthRepository {
           plugin: 'flutter_error/server_error');
     }
   }
+
+  Future<void> signout() async {
+    await firebaseAuth.signOut();
+  }
 }
