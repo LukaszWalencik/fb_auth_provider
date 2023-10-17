@@ -38,4 +38,18 @@ class AuthRepository {
           plugin: 'flutter_error/server_error');
     }
   }
+
+  Future<void> signin({required String email, required String password}) async {
+    try {
+      await firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } on fbAuth.FirebaseAuthException catch (e) {
+      throw CustomError(code: e.code, message: e.message!, plugin: e.plugin);
+    } catch (e) {
+      throw CustomError(
+          code: 'Exception',
+          message: e.toString(),
+          plugin: 'flutter_error/server_error');
+    }
+  }
 }
