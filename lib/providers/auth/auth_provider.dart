@@ -22,4 +22,8 @@ class AuthProvider with ChangeNotifier {
     print('AuthStatus: ${_state.authStatus}');
     notifyListeners();
   }
+
+  void signout() async {
+    await authRepository.signout();
+  }
 }
