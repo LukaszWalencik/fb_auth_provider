@@ -1,4 +1,8 @@
 import 'package:fb_auth_provider/pages/my_home_page.dart';
+import 'package:fb_auth_provider/pages/profile_page.dart';
+import 'package:fb_auth_provider/pages/signin_page.dart';
+import 'package:fb_auth_provider/pages/signup_page.dart';
+import 'package:fb_auth_provider/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -18,11 +22,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: MyHomePage());
+      title: 'Auth Provider',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: SplashPage(),
+      routes: {
+        SignupPage.routeName: (context) => SignupPage(),
+        SigninPage.routeName: (context) => SigninPage(),
+        MyHomePage.routeName: (context) => MyHomePage(),
+      },
+    );
   }
 }
