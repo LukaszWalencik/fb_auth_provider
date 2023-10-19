@@ -19,5 +19,7 @@ class AuthProvider with ChangeNotifier {
     if (user == null) {
       _state = _state.copyWith(authStatus: AuthStatus.unauthenticated);
     }
+    print('AuthStatus: ${_state.authStatus}');
+    notifyListeners();
   }
 }
