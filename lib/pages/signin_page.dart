@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
-  static const String reouteName = '/signin';
+  static const String routeName = '/signin';
 
   @override
   State<SigninPage> createState() => _SigninPageState();

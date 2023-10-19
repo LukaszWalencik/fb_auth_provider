@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
-  static const String reouteName = '/home';
+  static const String routeName = '/home';
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
