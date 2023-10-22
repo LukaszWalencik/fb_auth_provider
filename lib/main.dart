@@ -3,6 +3,7 @@ import 'package:fb_auth_provider/pages/my_home_page.dart';
 import 'package:fb_auth_provider/pages/signin_page.dart';
 import 'package:fb_auth_provider/pages/signup_page.dart';
 import 'package:fb_auth_provider/pages/splash_page.dart';
+import 'package:fb_auth_provider/providers/auth/auth_provider.dart';
 import 'package:fb_auth_provider/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
 import 'package:flutter/material.dart';
@@ -33,7 +34,14 @@ class MyApp extends StatelessWidget {
         ),
         StreamProvider<fbAuth.User?>(
             create: (context) => context.read<AuthRepository>().user,
-            initialData: null)
+            initialData: null),
+        ChangeNotifierProxyProvider<fbAuth.User?, AuthProvider>(
+          create: (context) =>
+              AuthProvider(authRepository: context.read<AuthRepository>()),
+          update: (BuildContext context, fbAuth.User? userStream,
+                  AuthProvider? authProvider) =>
+              authProvider!..update(userStream),
+        )
       ],
       child: MaterialApp(
         title: 'Auth Provider',
