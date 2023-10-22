@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthRepository(
               firebaseFirestore: FirebaseFirestore.instance,
               firebaseAuth: fbAuth.FirebaseAuth.instance),
-        )
+        ),
+        StreamProvider<fbAuth.User?>(
+            create: (context) => context.read<AuthRepository>().user,
+            initialData: null)
       ],
       child: MaterialApp(
         title: 'Auth Provider',
