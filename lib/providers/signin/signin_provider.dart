@@ -11,6 +11,11 @@ class SignInState extends Equatable {
 
   SignInState({required this.signInStatus, required this.error});
 
+  factory SignInState.initial() {
+    return SignInState(
+        signInStatus: SignInStatus.initial, error: CustomError());
+  }
+
   @override
   List<Object> get props => [signInStatus, error];
 
