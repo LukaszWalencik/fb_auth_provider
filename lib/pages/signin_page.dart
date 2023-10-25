@@ -50,6 +50,27 @@ class _SigninPageState extends State<SigninPage> {
                         _email = value;
                       },
                     ),
+                    TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        filled: true,
+                        labelText: 'Password',
+                        prefixIcon: Icon(Icons.lock),
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Password is required';
+                        }
+                        if (value.trim().length < 6) {
+                          return 'Password must be at least 6 characters long';
+                        }
+                        return null;
+                      },
+                      onSaved: (String? value) {
+                        _password = value;
+                      },
+                    ),
                   ],
                 )),
           ),
