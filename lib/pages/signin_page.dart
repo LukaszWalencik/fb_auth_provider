@@ -1,4 +1,7 @@
+import 'package:fb_auth_provider/pages/signup_page.dart';
+import 'package:fb_auth_provider/providers/signin/signin_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
 
 class SigninPage extends StatefulWidget {
@@ -14,7 +17,16 @@ class _SigninPageState extends State<SigninPage> {
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   String? _email, _password;
 
-  void submit() {}
+  void _submit() {
+    setState(() {
+      _autovalidateMode = AutovalidateMode.always;
+    });
+    final form = _formKey.currentState;
+    if (form == null || !form.validate()) return;
+    print('Email: $_email  Password: $_password');
+    context.read<SigninProvider>().signin(email: _email!, password: _password!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -73,7 +85,7 @@ class _SigninPageState extends State<SigninPage> {
                     ),
                     SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _submit,
                       child: Text('Sign In'),
                       style: ElevatedButton.styleFrom(
                         textStyle: TextStyle(
@@ -85,7 +97,9 @@ class _SigninPageState extends State<SigninPage> {
                       height: 10,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, SignupPage.routeName);
+                      },
                       child: Text('Not a member? Sign in!'),
                       style: TextButton.styleFrom(
                         textStyle: TextStyle(
