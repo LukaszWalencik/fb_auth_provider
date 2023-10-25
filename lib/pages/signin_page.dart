@@ -28,7 +28,29 @@ class _SigninPageState extends State<SigninPage> {
                 autovalidateMode: _autovalidateMode,
                 child: ListView(
                   shrinkWrap: false,
-                  children: [],
+                  children: [
+                    TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      autocorrect: false,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          labelText: 'Email',
+                          prefixIcon: Icon(Icons.email)),
+                      validator: (String? value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Email required';
+                        }
+                        if (!isEmail(value.trim())) {
+                          return 'Enter a valid email';
+                        }
+                        return null;
+                      },
+                      onSaved: (String? value) {
+                        _email = value;
+                      },
+                    ),
+                  ],
                 )),
           ),
         ),
