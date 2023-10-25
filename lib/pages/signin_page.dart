@@ -71,6 +71,19 @@ class _SigninPageState extends State<SigninPage> {
                         _password = value;
                       },
                     ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Sign In'),
+                      style: ElevatedButton.styleFrom(
+                        textStyle: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600),
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                   ],
                 )),
           ),
