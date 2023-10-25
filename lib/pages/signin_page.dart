@@ -84,6 +84,14 @@ class _SigninPageState extends State<SigninPage> {
                     SizedBox(
                       height: 10,
                     ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text('Not a member? Sign in!'),
+                      style: TextButton.styleFrom(
+                        textStyle: TextStyle(
+                            fontSize: 30, decoration: TextDecoration.underline),
+                      ),
+                    ),
                   ],
                 )),
           ),
