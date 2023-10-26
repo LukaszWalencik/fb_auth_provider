@@ -22,4 +22,20 @@ void errorDialog(BuildContext context, CustomError e) {
       },
     );
   }
+  if (Platform.isAndroid) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(e.code),
+            content: Text(e.plugin + '\n' + e.message),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.pop(context),
+              )
+            ],
+          );
+        });
+  }
 }
