@@ -1,5 +1,7 @@
+import 'package:fb_auth_provider/models/custom_error.dart';
 import 'package:fb_auth_provider/pages/signup_page.dart';
 import 'package:fb_auth_provider/providers/signin/signin_provider.dart';
+import 'package:fb_auth_provider/utils/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
@@ -17,14 +19,21 @@ class _SigninPageState extends State<SigninPage> {
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   String? _email, _password;
 
-  void _submit() {
+  void _submit() async {
     setState(() {
       _autovalidateMode = AutovalidateMode.always;
     });
     final form = _formKey.currentState;
     if (form == null || !form.validate()) return;
     print('Email: $_email  Password: $_password');
-    context.read<SigninProvider>().signin(email: _email!, password: _password!);
+
+    try {
+      await context
+          .read<SigninProvider>()
+          .signin(email: _email!, password: _password!);
+    } on CustomError catch (e) {
+      errorDialog(context, e);
+    }
   }
 
   @override
