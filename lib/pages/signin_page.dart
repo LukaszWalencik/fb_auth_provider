@@ -40,95 +40,99 @@ class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     final signinState = context.watch<SigninProvider>().state;
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        body: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Form(
-                key: _formKey,
-                autovalidateMode: _autovalidateMode,
-                child: ListView(
-                  shrinkWrap: false,
-                  children: [
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      autocorrect: false,
-                      decoration: InputDecoration(
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          body: Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Form(
+                  key: _formKey,
+                  autovalidateMode: _autovalidateMode,
+                  child: ListView(
+                    shrinkWrap: false,
+                    children: [
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            labelText: 'Email',
+                            prefixIcon: Icon(Icons.email)),
+                        validator: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Email required';
+                          }
+                          if (!isEmail(value.trim())) {
+                            return 'Enter a valid email';
+                          }
+                          return null;
+                        },
+                        onSaved: (String? value) {
+                          _email = value;
+                        },
+                      ),
+                      TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           filled: true,
-                          labelText: 'Email',
-                          prefixIcon: Icon(Icons.email)),
-                      validator: (String? value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Email required';
-                        }
-                        if (!isEmail(value.trim())) {
-                          return 'Enter a valid email';
-                        }
-                        return null;
-                      },
-                      onSaved: (String? value) {
-                        _email = value;
-                      },
-                    ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        filled: true,
-                        labelText: 'Password',
-                        prefixIcon: Icon(Icons.lock),
+                          labelText: 'Password',
+                          prefixIcon: Icon(Icons.lock),
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Password is required';
+                          }
+                          if (value.trim().length < 6) {
+                            return 'Password must be at least 6 characters long';
+                          }
+                          return null;
+                        },
+                        onSaved: (String? value) {
+                          _password = value;
+                        },
                       ),
-                      validator: (String? value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Password is required';
-                        }
-                        if (value.trim().length < 6) {
-                          return 'Password must be at least 6 characters long';
-                        }
-                        return null;
-                      },
-                      onSaved: (String? value) {
-                        _password = value;
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed:
-                          signinState.signInStatus == SignInStatus.submitting
-                              ? null
-                              : _submit,
-                      child: Text(
-                          signinState.signInStatus == SignInStatus.submitting
-                              ? 'Loading..'
-                              : 'Sign In'),
-                      style: ElevatedButton.styleFrom(
-                        textStyle: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600),
-                        padding: EdgeInsets.symmetric(vertical: 10),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed:
+                            signinState.signInStatus == SignInStatus.submitting
+                                ? null
+                                : _submit,
+                        child: Text(
+                            signinState.signInStatus == SignInStatus.submitting
+                                ? 'Loading..'
+                                : 'Sign In'),
+                        style: ElevatedButton.styleFrom(
+                          textStyle: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextButton(
-                      onPressed:
-                          signinState.signInStatus == SignInStatus.submitting
-                              ? null
-                              : () {
-                                  Navigator.pushNamed(
-                                      context, SignupPage.routeName);
-                                },
-                      child: Text('Not a member? Sign in!'),
-                      style: TextButton.styleFrom(
-                        textStyle: TextStyle(
-                            fontSize: 30, decoration: TextDecoration.underline),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ],
-                )),
+                      TextButton(
+                        onPressed:
+                            signinState.signInStatus == SignInStatus.submitting
+                                ? null
+                                : () {
+                                    Navigator.pushNamed(
+                                        context, SignupPage.routeName);
+                                  },
+                        child: Text('Not a member? Sign in!'),
+                        style: TextButton.styleFrom(
+                          textStyle: TextStyle(
+                              fontSize: 30,
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ],
+                  )),
+            ),
           ),
         ),
       ),
