@@ -114,9 +114,13 @@ class _SigninPageState extends State<SigninPage> {
                       height: 10,
                     ),
                     TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, SignupPage.routeName);
-                      },
+                      onPressed:
+                          signinState.signInStatus == SignInStatus.submitting
+                              ? null
+                              : () {
+                                  Navigator.pushNamed(
+                                      context, SignupPage.routeName);
+                                },
                       child: Text('Not a member? Sign in!'),
                       style: TextButton.styleFrom(
                         textStyle: TextStyle(
