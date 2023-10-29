@@ -1,6 +1,7 @@
 import 'package:fb_auth_provider/models/custom_error.dart';
 import 'package:fb_auth_provider/pages/signup_page.dart';
 import 'package:fb_auth_provider/providers/signin/signin_provider.dart';
+import 'package:fb_auth_provider/providers/signin/signin_state.dart';
 import 'package:fb_auth_provider/utils/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,7 @@ class _SigninPageState extends State<SigninPage> {
 
   @override
   Widget build(BuildContext context) {
+    final signinState = context.watch<SigninProvider>().state;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -94,8 +96,14 @@ class _SigninPageState extends State<SigninPage> {
                     ),
                     SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: _submit,
-                      child: Text('Sign In'),
+                      onPressed:
+                          signinState.signInStatus == SignInStatus.submitting
+                              ? null
+                              : _submit,
+                      child: Text(
+                          signinState.signInStatus == SignInStatus.submitting
+                              ? 'Loading..'
+                              : 'Sign In'),
                       style: ElevatedButton.styleFrom(
                         textStyle: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w600),
