@@ -27,7 +27,7 @@ class _SigninPageState extends State<SigninPage> {
     final form = _formKey.currentState;
     if (form == null || !form.validate()) return;
     print('Email: $_email  Password: $_password');
-
+    form.save();
     try {
       await context
           .read<SigninProvider>()
