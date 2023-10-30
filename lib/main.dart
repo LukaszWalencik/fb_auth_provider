@@ -5,6 +5,7 @@ import 'package:fb_auth_provider/pages/signup_page.dart';
 import 'package:fb_auth_provider/pages/splash_page.dart';
 import 'package:fb_auth_provider/providers/auth/auth_provider.dart';
 import 'package:fb_auth_provider/providers/signin/signin_provider.dart';
+import 'package:fb_auth_provider/providers/signup/signup_provider.dart';
 import 'package:fb_auth_provider/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
 import 'package:flutter/material.dart';
@@ -46,6 +47,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<SigninProvider>(
           create: (context) =>
               SigninProvider(authRepository: context.read<AuthRepository>()),
+        ),
+        ChangeNotifierProvider<SignUpProvider>(
+          create: (context) =>
+              SignUpProvider(authRepository: context.read<AuthRepository>()),
         )
       ],
       child: MaterialApp(
@@ -57,7 +62,7 @@ class MyApp extends StatelessWidget {
         ),
         home: SplashPage(),
         routes: {
-          SignupPage.routeName: (context) => SignupPage(),
+          SignUpPage.routeName: (context) => SignUpPage(),
           SigninPage.routeName: (context) => SigninPage(),
           MyHomePage.routeName: (context) => MyHomePage(),
         },

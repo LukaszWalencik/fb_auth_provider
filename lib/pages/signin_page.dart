@@ -121,7 +121,7 @@ class _SigninPageState extends State<SigninPage> {
                                 ? null
                                 : () {
                                     Navigator.pushNamed(
-                                        context, SignupPage.routeName);
+                                        context, SignUpPage.routeName);
                                   },
                         child: Text('Not a member? Sign in!'),
                         style: TextButton.styleFrom(

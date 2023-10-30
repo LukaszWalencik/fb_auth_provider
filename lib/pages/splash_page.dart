@@ -16,7 +16,7 @@ class SplashPage extends StatelessWidget {
     if (authState == AuthStatus.unauthenticated) {
       WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignupPage()));
+            context, MaterialPageRoute(builder: (context) => SignUpPage()));
       });
     } else if (authState == AuthStatus.authenticated) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
