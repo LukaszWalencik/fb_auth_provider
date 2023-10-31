@@ -1,3 +1,4 @@
+import 'package:fb_auth_provider/pages/profile_page.dart';
 import 'package:fb_auth_provider/providers/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   context.read<AuthProvider>().signout();
                 },
-                icon: Icon(Icons.exit_to_app))
+                icon: Icon(Icons.exit_to_app)),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ProfilePage();
+                  }));
+                },
+                icon: Icon(Icons.account_circle))
           ],
         ),
         body: Center(
