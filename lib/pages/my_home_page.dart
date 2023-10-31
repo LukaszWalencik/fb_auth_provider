@@ -28,7 +28,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: Center(
-          child: Text('Home'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Provider',
+                style: TextStyle(fontSize: 42),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Provider is an awesome\nstate management library\nfor flutter',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 24),
+              )
+            ],
+          ),
         ),
       ),
     );
