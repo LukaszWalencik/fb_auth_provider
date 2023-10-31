@@ -14,6 +14,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Home'),
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.exit_to_app))
+          ],
+        ),
         body: Center(
           child: Text('Home'),
         ),
