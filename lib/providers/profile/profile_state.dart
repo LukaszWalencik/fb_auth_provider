@@ -21,6 +21,13 @@ class ProfileState extends Equatable {
     required this.customError,
   });
 
+  factory ProfileState.initial() {
+    return ProfileState(
+        profileStatus: ProfileStatus.initial,
+        user: User.initialUser(),
+        customError: CustomError());
+  }
+
   @override
   List<Object> get props => [profileStatus, user, customError];
 
