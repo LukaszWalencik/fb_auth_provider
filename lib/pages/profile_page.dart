@@ -47,6 +47,10 @@ class _ProfilePageState extends State<ProfilePage> {
     final profileState = context.watch<ProfileProvider>().state;
     if (profileState.profileStatus == ProfileStatus.initial) {
       return Container();
+    } else if (profileState.profileStatus == ProfileStatus.loading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
     return Container();
   }
