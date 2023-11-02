@@ -70,7 +70,54 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       );
     }
-    return Container();
+    return Card(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FadeInImage.assetNetwork(
+            placeholder: 'assets/image/loading.gif',
+            image: profileState.user.profileImage,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '- id: ${profileState.user.name}',
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '- id: ${profileState.user.email}',
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '- id: ${profileState.user.point}',
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '- id: ${profileState.user.rank}',
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '- id: ${profileState.user.id}',
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   @override
