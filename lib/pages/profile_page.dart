@@ -43,12 +43,16 @@ class _ProfilePageState extends State<ProfilePage> {
     super.dispose();
   }
 
+  Widget _buildProfile() {
+    final profileState = context.watch<ProfileProvider>().state;
+    if (profileState.profileStatus == ProfileStatus.initial) {
+      return Container();
+    }
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Profile'),
-      ),
-    );
+    return Scaffold(body: _buildProfile());
   }
 }
