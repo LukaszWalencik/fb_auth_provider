@@ -51,6 +51,24 @@ class _ProfilePageState extends State<ProfilePage> {
       return Center(
         child: CircularProgressIndicator(),
       );
+    } else if (profileState.profileStatus == ProfileStatus.error) {
+      return Center(
+        child: Row(
+          children: [
+            Image.asset(
+              'assets/images/error.png',
+              width: 75,
+              height: 75,
+              fit: BoxFit.cover,
+            ),
+            Text(
+              'Ooops\ntry again',
+              style: TextStyle(
+                  fontSize: 24, color: Colors.red, fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+      );
     }
     return Container();
   }
