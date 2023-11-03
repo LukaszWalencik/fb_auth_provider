@@ -1,29 +1,26 @@
 import 'package:fb_auth_provider/providers/auth/auth_state.dart';
 import 'package:fb_auth_provider/repositories/auth_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
+import 'package:state_notifier/state_notifier.dart';
 
-class AuthProvider with ChangeNotifier {
-  AuthState _state = AuthState.unknow();
+class AuthProvider extends StateNotifier<AuthState> with LocatorMixin {
+  AuthProvider() : super(AuthState.unknow());
 
-  AuthProvider({required this.authRepository});
-  AuthState get state => _state;
-
-  final AuthRepository authRepository;
-
-  void update(fbAuth.User? user) {
+  @override
+  void update(Locator watch) {
+    final user = watch<fbAuth.User?>();
     if (user != null) {
-      _state =
-          _state.copyWith(authStatus: AuthStatus.authenticated, user: user);
+      state = state.copyWith(authStatus: AuthStatus.authenticated, user: user);
     }
     if (user == null) {
-      _state = _state.copyWith(authStatus: AuthStatus.unauthenticated);
+      state = state.copyWith(authStatus: AuthStatus.unauthenticated);
     }
-    print('AuthStatus: ${_state.authStatus}');
-    notifyListeners();
+    print('AuthStatus: ${state.authStatus}');
+
+    super.update(watch);
   }
 
   void signout() async {
-    await authRepository.signout();
+    await read<AuthRepository>().signout();
   }
 }
