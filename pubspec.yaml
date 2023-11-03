@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: ^4.9.3
   equatable: ^2.0.5
   validators: ^3.0.0
+  state_notifier: ^1.0.0
+  flutter_state_notifier: ^1.0.0
 
 dev_dependencies:
   flutter_test:
