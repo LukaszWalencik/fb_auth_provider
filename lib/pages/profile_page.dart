@@ -122,6 +122,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildProfile());
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Profile'),
+        ),
+        body: _buildProfile());
   }
 }
