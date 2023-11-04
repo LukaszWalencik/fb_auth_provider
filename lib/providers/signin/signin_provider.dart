@@ -1,26 +1,19 @@
 import 'package:fb_auth_provider/models/custom_error.dart';
 import 'package:fb_auth_provider/providers/signin/signin_state.dart';
 import 'package:fb_auth_provider/repositories/auth_repository.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
-class SigninProvider with ChangeNotifier {
-  SignInState _state = SignInState.initial();
-
-  SigninProvider({required this.authRepository});
-  SignInState get state => _state;
-
-  final AuthRepository authRepository;
+class SigninProvider extends StateNotifier<SignInState> with LocatorMixin {
+  SigninProvider() : super(SignInState.initial());
 
   Future<void> signin({required String email, required String password}) async {
-    _state = _state.copyWith(signInStatus: SignInStatus.submitting);
-    notifyListeners();
+    state = state.copyWith(signInStatus: SignInStatus.submitting);
     try {
+      final authRepository = read<AuthRepository>();
       await authRepository.signin(email: email, password: password);
-      _state = _state.copyWith(signInStatus: SignInStatus.success);
-      notifyListeners();
+      state = state.copyWith(signInStatus: SignInStatus.success);
     } on CustomError catch (e) {
-      _state = _state.copyWith(signInStatus: SignInStatus.error, error: e);
-      notifyListeners();
+      state = state.copyWith(signInStatus: SignInStatus.error, error: e);
       rethrow;
     }
   }
