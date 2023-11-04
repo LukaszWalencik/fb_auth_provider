@@ -6,6 +6,7 @@ import 'package:fb_auth_provider/pages/splash_page.dart';
 import 'package:fb_auth_provider/providers/auth/auth_provider.dart';
 import 'package:fb_auth_provider/providers/auth/auth_state.dart';
 import 'package:fb_auth_provider/providers/profile/profile_provider.dart';
+import 'package:fb_auth_provider/providers/profile/profile_state.dart';
 import 'package:fb_auth_provider/providers/signin/signin_provider.dart';
 import 'package:fb_auth_provider/providers/signin/signin_state.dart';
 import 'package:fb_auth_provider/providers/signup/signup_provider.dart';
@@ -55,9 +56,8 @@ class MyApp extends StatelessWidget {
         StateNotifierProvider<SignUpProvider, SignUpState>(
           create: (context) => SignUpProvider(),
         ),
-        ChangeNotifierProvider<ProfileProvider>(
-          create: (context) => ProfileProvider(
-              profileRepository: context.read<ProfileRepository>()),
+        StateNotifierProvider<ProfileProvider, ProfileState>(
+          create: (context) => ProfileProvider(),
         )
       ],
       child: MaterialApp(
