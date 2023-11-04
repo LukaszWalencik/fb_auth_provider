@@ -3,25 +3,20 @@ import 'package:fb_auth_provider/models/user_model.dart';
 import 'package:fb_auth_provider/providers/profile/profile_state.dart';
 import 'package:fb_auth_provider/repositories/profile_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
-class ProfileProvider with ChangeNotifier {
-  ProfileState _state = ProfileState.initial();
-
-  ProfileProvider({required this.profileRepository});
-  ProfileState get state => _state;
-  final ProfileRepository profileRepository;
+class ProfileProvider extends StateNotifier<ProfileState> with LocatorMixin {
+  ProfileProvider() : super(ProfileState.initial());
 
   Future<void> getProfile({required String uid}) async {
-    _state = _state.copyWith(profileStatus: ProfileStatus.loading);
-    notifyListeners();
+    state = state.copyWith(profileStatus: ProfileStatus.loading);
     try {
+      final profileRepository = read<ProfileRepository>();
       final User user = await profileRepository.getProfile(uid: uid);
-      _state = _state.copyWith(profileStatus: ProfileStatus.loaded, user: user);
-      notifyListeners();
+      state = state.copyWith(profileStatus: ProfileStatus.loaded, user: user);
     } on CustomError catch (e) {
-      _state =
-          _state.copyWith(profileStatus: ProfileStatus.error, customError: e);
-      notifyListeners();
+      state =
+          state.copyWith(profileStatus: ProfileStatus.error, customError: e);
     }
   }
 }
