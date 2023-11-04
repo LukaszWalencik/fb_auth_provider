@@ -9,6 +9,7 @@ import 'package:fb_auth_provider/providers/profile/profile_provider.dart';
 import 'package:fb_auth_provider/providers/signin/signin_provider.dart';
 import 'package:fb_auth_provider/providers/signin/signin_state.dart';
 import 'package:fb_auth_provider/providers/signup/signup_provider.dart';
+import 'package:fb_auth_provider/providers/signup/signup_state.dart';
 import 'package:fb_auth_provider/repositories/auth_repository.dart';
 import 'package:fb_auth_provider/repositories/profile_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
@@ -51,9 +52,8 @@ class MyApp extends StatelessWidget {
         StateNotifierProvider<SigninProvider, SignInState>(
           create: (context) => SigninProvider(),
         ),
-        ChangeNotifierProvider<SignUpProvider>(
-          create: (context) =>
-              SignUpProvider(authRepository: context.read<AuthRepository>()),
+        StateNotifierProvider<SignUpProvider, SignUpState>(
+          create: (context) => SignUpProvider(),
         ),
         ChangeNotifierProvider<ProfileProvider>(
           create: (context) => ProfileProvider(
