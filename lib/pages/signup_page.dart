@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final signupState = context.watch<SignUpProvider>().state;
+    final signupState = context.watch<SignUpState>();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
