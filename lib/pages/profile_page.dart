@@ -1,4 +1,3 @@
-import 'package:fb_auth_provider/providers/auth/auth_provider.dart';
 import 'package:fb_auth_provider/providers/profile/profile_provider.dart';
 import 'package:fb_auth_provider/providers/profile/profile_state.dart';
 import 'package:fb_auth_provider/utils/error_dialog.dart';
@@ -15,11 +14,12 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late final ProfileProvider profilProvider;
+  late final void Function() _removeListener;
 
   @override
   void initState() {
     profilProvider = context.read<ProfileProvider>();
-    profilProvider.addListener(errorDialogListener);
+    _removeListener = profilProvider.addListener(errorDialogListener);
     getProfile();
     super.initState();
   }
@@ -31,20 +31,20 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  void errorDialogListener() {
-    if (profilProvider.state.profileStatus == ProfileStatus.error) {
-      errorDialog(context, profilProvider.state.customError);
+  void errorDialogListener(ProfileState state) {
+    if (state.profileStatus == ProfileStatus.error) {
+      errorDialog(context, state.customError);
     }
   }
 
   @override
   void dispose() {
-    profilProvider.removeListener(errorDialogListener);
+    _removeListener();
     super.dispose();
   }
 
   Widget _buildProfile() {
-    final profileState = context.watch<ProfileProvider>().state;
+    final profileState = context.watch<ProfileState>();
     if (profileState.profileStatus == ProfileStatus.initial) {
       return Container();
     } else if (profileState.profileStatus == ProfileStatus.loading) {
