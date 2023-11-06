@@ -19,7 +19,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     profilProvider = context.read<ProfileProvider>();
-    _removeListener = profilProvider.addListener(errorDialogListener);
+    _removeListener =
+        profilProvider.addListener(errorDialogListener, fireImmediately: false);
     getProfile();
     super.initState();
   }
